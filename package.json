@@ -1,0 +1,25 @@
+{
+  "name": "chicosdiscordbot",
+  "version": "1.0.0",
+  "description": "bot for los chicos",
+  "main": "src/app.ts",
+  "repository": "https://github.com/eugeneiohc/chicosdiscordbot.git",
+  "author": "<eugeneiohc@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./bin/app.js",
+    "dev": "ts-node ./src/app.ts"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
