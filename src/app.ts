@@ -1,13 +1,22 @@
-import express from "express";
+import { Client, Intents } from "discord.js";
 
-const app = express();
-const port = 8080;
+require('dotenv').config();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+const token = process.env.TOKEN || "N/A";
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+
+client.on("ready", () => {
+  if(client && client.user) {
+    console.log(`Logged in as ${client.user.tag}!`);
+  }
 });
 
-app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  if (interaction.commandName === "ping") {
+    await interaction.reply("Pong!");
+  }
 });
 
+client.login("OTEwMzM5MzEyMTE2MTcwNzYy.YZRZjQ.SpPxz-ekDKXdozoRaDKLUUh73kw");
