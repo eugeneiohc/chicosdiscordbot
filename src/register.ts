@@ -1,6 +1,8 @@
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 
+require('dotenv').config();
+
 const commands = [
   {
     name: "ping",
@@ -13,6 +15,10 @@ const client_id = process.env.CLIENT_ID || "N/A";
 const guild_ids = {
   cmu: process.env.GUILD_ID_CMU || "N/A"
 }
+
+console.log(token)
+console.log(client_id)
+console.log(guild_ids)
 
 const rest = new REST({ version: "9" }).setToken(token);
 
