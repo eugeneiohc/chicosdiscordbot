@@ -38,41 +38,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var rest_1 = require("@discordjs/rest");
 var v9_1 = require("discord-api-types/v9");
-require('dotenv').config();
-var commands = [
-    {
-        name: "ping",
-        description: "Replies with Pong!",
-    },
-];
+var builders_1 = require("@discordjs/builders");
+require("dotenv").config();
 var token = process.env.TOKEN || "N/A";
 var client_id = process.env.CLIENT_ID || "N/A";
 var guild_ids = {
-    cmu: process.env.GUILD_ID_CMU || "N/A"
+    cmu: process.env.GUILD_ID_CMU || "N/A",
 };
-console.log(token);
-console.log(client_id);
-console.log(guild_ids);
+var commands = [
+    new builders_1.SlashCommandBuilder().setName("ping").setDescription("Replies with pong"),
+].map(function (command) { return command.toJSON; });
 var rest = new rest_1.REST({ version: "9" }).setToken(token);
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, _b, _i, guild, error_1;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a = [];
+                for (_b in guild_ids)
+                    _a.push(_b);
+                _i = 0;
+                _c.label = 1;
+            case 1:
+                if (!(_i < _a.length)) return [3 /*break*/, 6];
+                guild = _a[_i];
                 console.log("Started refreshing application (/) commands.");
-                return [4 /*yield*/, rest.put(v9_1.Routes.applicationGuildCommands(client_id, guild_ids.cmu), {
+                _c.label = 2;
+            case 2:
+                _c.trys.push([2, 4, , 5]);
+                return [4 /*yield*/, rest.put(v9_1.Routes.applicationGuildCommands(client_id, guild), {
                         body: commands,
                     })];
-            case 1:
-                _a.sent();
-                console.log("Successfully reloaded application (/) commands.");
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
+            case 3:
+                _c.sent();
+                console.log("Successfully reloaded application (/) commands for the server: " + guild);
+                return [3 /*break*/, 5];
+            case 4:
+                error_1 = _c.sent();
                 console.error(error_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5:
+                _i++;
+                return [3 /*break*/, 1];
+            case 6: return [2 /*return*/];
         }
     });
 }); })();

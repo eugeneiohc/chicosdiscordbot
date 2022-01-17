@@ -37,26 +37,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = require("discord.js");
-require('dotenv').config();
-var token = process.env.TOKEN || "N/A";
+require("dotenv").config();
+var token = process.env.TOKEN;
 var client = new discord_js_1.Client({ intents: [discord_js_1.Intents.FLAGS.GUILDS] });
+client.once("ready", function () {
+    console.log("Armed and Ready!");
+});
 client.on("ready", function () {
     if (client && client.user) {
         console.log("Logged in as " + client.user.tag + "!");
     }
 });
+// interactions
 client.on("interactionCreate", function (interaction) { return __awaiter(void 0, void 0, void 0, function () {
+    var commandName;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 if (!interaction.isCommand())
                     return [2 /*return*/];
-                if (!(interaction.commandName === "ping")) return [3 /*break*/, 2];
-                return [4 /*yield*/, interaction.reply("Pong!")];
+                commandName = interaction.commandName;
+                if (!(commandName === "ping")) return [3 /*break*/, 2];
+                return [4 /*yield*/, interaction.reply("pong")];
             case 1:
                 _a.sent();
-                _a.label = 2;
-            case 2: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 2:
+                if (!(commandName === "server")) return [3 /*break*/, 4];
+                return [4 /*yield*/, interaction.reply("This shit's just running on my laptop -Keepo")];
+            case 3:
+                _a.sent();
+                return [3 /*break*/, 6];
+            case 4:
+                if (!(commandName === "user")) return [3 /*break*/, 6];
+                return [4 /*yield*/, interaction.reply("keepo")];
+            case 5:
+                _a.sent();
+                _a.label = 6;
+            case 6: return [2 /*return*/];
         }
     });
 }); });
